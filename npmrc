@@ -1,0 +1,33 @@
+strict-ssl=false
+@fortawesome:registry=https://npm.fontawesome.com/
+//npm.fontawesome.com/:_authToken=79D64EDF-E010-4297-B679-A0112C8D99F6
+
+registry=https://pkgs.dev.azure.com/kgh-digital/_packaging/CTDS-feed/npm/registry/
+always-auth=true
+//pkgs.dev.azure.com/kgh-digital/_packaging/CTDS-feed/npm/registry/:username=kgh-digital
+//pkgs.dev.azure.com/kgh-digital/_packaging/CTDS-feed/npm/registry/:_password="dnRiaGlqaGIzejR0Mmlya2dxbzNueW1pajZkcTVuaXhiNnVwcDJrM2N3dWY3Z2dvNHJlYQ=="
+//pkgs.dev.azure.com/kgh-digital/_packaging/CTDS-feed/npm/registry/:email=npm requires email to be set but doesn't use the value
+//pkgs.dev.azure.com/kgh-digital/_packaging/CTDS-feed/npm/:username=kgh-digital
+//pkgs.dev.azure.com/kgh-digital/_packaging/CTDS-feed/npm/:_password="dnRiaGlqaGIzejR0Mmlya2dxbzNueW1pajZkcTVuaXhiNnVwcDJrM2N3dWY3Z2dvNHJlYQ=="
+//pkgs.dev.azure.com/kgh-digital/_packaging/CTDS-feed/npm/:email=npm requires email to be set but doesn't use the value
+
+
+; Maersk components
+cache=npmcache
+strict-ssl=false
+always-auth=true
+email=kghreader
+@maersk-global:registry=https://tools-nexus.maerskdev.net/repository/npm-group-internal/
+scripts-prepend-node-path=true
+//tools-nexus.maerskdev.net/repository/npm-group-internal/:_auth="bmlraXRhLmdvc2FpOkRsQUxMbEtTTVRCeFp0REp2R2k5"
+li3y48n4iykus7cfykel8f7yku75ygig5c8=true
+
+; Maersk components (again)
+cache=npmcache
+strict-ssl=false
+always-auth=true
+email=kghreader
+@maersk:registry=https://tools-nexus.maerskdev.net/repository/npm-group-internal/
+scripts-prepend-node-path=true
+//tools-nexus.maerskdev.net/repository/npm-group-internal/:_auth="bmlraXRhLmdvc2FpOkRsQUxMbEtTTVRCeFp0REp2R2k5"
+li3y48n4iykus7cfykel8f7yku75ygig5c8=true
