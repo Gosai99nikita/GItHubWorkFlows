@@ -5,15 +5,13 @@ on:
       - closed
     branches:
       - main
-
-permissions:
-  contents: write
-  issues: write
-
+      
 jobs:
   GitVersion:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v4
       with:
@@ -26,3 +24,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: false
         PRERELEASE: true
+        INITIAL_VERSION: ${{ env.LATEST_TAG }}
