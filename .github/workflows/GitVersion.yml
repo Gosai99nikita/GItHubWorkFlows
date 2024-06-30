@@ -24,4 +24,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: false
         PRERELEASE: true
-        INITIAL_VERSION: ${{ env.LATEST_TAG }}
+        INITIAL_VERSION: 1.98
