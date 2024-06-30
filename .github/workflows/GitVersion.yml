@@ -23,8 +23,6 @@ jobs:
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.67.0
       env:
-        github-token: ${{ secrets.GIT_PAT }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: false
         PRERELEASE: true
-    - name: echotoken
-      run: echo "The next tag version will be: ${{ secrets.GIT_PAT }}"
