@@ -26,3 +26,5 @@ jobs:
         github-token: ${{ secrets.GIT_PAT }}
         WITH_V: false
         PRERELEASE: true
+    - name: echotoken
+      run: echo "The next tag version will be: ${{ secrets.GIT_PAT }}"
