@@ -20,7 +20,9 @@ jobs:
 
     - name: Get pull request labels
       id: get_labels
-      uses: actions-ecosystem/action-get-latest-pull-request-labels@v1.2
+      uses: actions-ecosystem/action-get-latest-pull-request-labels@v1
+      with:
+          GITHUB_TOKEN: ${{ github.token }}  # Using github.token for read-only access
 
     - name: Determine version bump type
       id: bump_type
