@@ -1,4 +1,5 @@
 name: Automated-bump-version
+
 on:
   pull_request:
     types:
@@ -11,34 +12,35 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-22.04
     permissions:
-      contents: write
+      contents: read  # Only read permissions are necessary for fetching information
     steps:
-    - uses: actions/checkout@v4
-      with:
-        ref: ${{ github.event.pull_request.merge_commit_sha }}
-        fetch-depth: '0'
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: '0'
 
-    - name: Determine version bump type
-      id: bump_type
-      run: |
+      - name: Determine version bump type
+        id: bump_type
+        run: |
           label_name="${{ github.event.label.name }}"
           case $label_name in
             major)
-              DEFAULT_BUMP="major"
+              echo "DEFAULT_BUMP=major" >> $GITHUB_ENV
               ;;
             minor)
-              DEFAULT_BUMP="minor"
+              echo "DEFAULT_BUMP=minor" >> $GITHUB_ENV
               ;;
             *)
-              DEFAULT_BUMP="patch"
+              echo "DEFAULT_BUMP=patch" >> $GITHUB_ENV
               ;;
           esac
-          echo "::set-output name=DEFAULT_BUMP::$DEFAULT_BUMP"
 
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.36.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        WITH_V: false
-        PRERELEASE: true
-        DEFAULT_BUMP: ${{ steps.bump_type.outputs.DEFAULT_BUMP }}
+      - name: Bump version and push tag
+        if: ${{ env.DEFAULT_BUMP != 'patch' }}  # Ensure only non-patch bumps are processed
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          WITH_V: false
+          PRERELEASE: true
+          DEFAULT_BUMP: ${{ env.DEFAULT_BUMP }}
