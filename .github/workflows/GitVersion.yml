@@ -23,10 +23,10 @@ jobs:
       uses: actions-ecosystem/action-get-latest-pull-request-labels@v1
 
     - name: Determine Default Bump
-        id: determine-bump
-        run: |
-          labels=$(jq -r '.pull_request.labels[].name' "${GITHUB_EVENT_PATH}")
-          if [[ $labels == *"major"* ]]; then
+      id: determine-bump
+      run: |
+       labels=$(jq -r '.pull_request.labels[].name' "${GITHUB_EVENT_PATH}")
+         if [[ $labels == *"major"* ]]; then
             echo "major"
           elif [[ $labels == *"patch"* ]]; then
             echo "patch"
