@@ -1,4 +1,26 @@
-- name: Determine version bump type
+name: Automated-bump-version
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  increment-version:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read  # Only read permissions are necessary for fetching information
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: '0'
+
+      - name: Determine version bump type
         id: bump_type
         run: |
           label_name="${{ github.event.label.name }}"
@@ -18,3 +40,12 @@
             esac
           fi
           echo "DEFAULT_BUMP=$DEFAULT_BUMP" >> $GITHUB_ENV
+
+      - name: Bump version and push tag
+        if: ${{ env.DEFAULT_BUMP != 'patch' }}  # Ensure only non-patch bumps are processed
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          WITH_V: false
+          PRERELEASE: true
+          DEFAULT_BUMP: ${{ env.DEFAULT_BUMP }}
